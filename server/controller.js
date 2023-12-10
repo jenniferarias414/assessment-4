@@ -1,3 +1,7 @@
+let goals = []
+let globalID = 1
+
+
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -17,6 +21,23 @@ module.exports = {
         let randomFortune = fortunes[randomIndex];
 
         res.status(200).send(randomFortune);
+    },
+
+    createGoal: (req, res) => {
+        req.body.id = globalID
+        goals.push(req.body)
+        globalID++
+        res.status(200).send(goals)
+    },
+
+    deleteGoal: (req, res) => {
+        const newArray = goals.filter((goal) => goal.id !== +req.params.id)
+        goals = newArray
+        res.status(200).send(goals)
+    },
+
+    getGoals: (req, res) => {
+        res.status(200).send(goals)
     }
 
 }

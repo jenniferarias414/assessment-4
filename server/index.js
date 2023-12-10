@@ -1,7 +1,7 @@
 //----REQUIRE ALL FILES/PKGS-------
 const express = require("express");
 const cors = require("cors");
-const { getCompliment, getFortune } = require('./controller')
+const { getCompliment, getFortune, createGoal, deleteGoal, getGoals } = require('./controller')
 
 //------CONFIGURE THE SERVER------
 const app = express();
@@ -14,6 +14,9 @@ app.use(express.json());
 
 app.get("/api/compliment", getCompliment);
 app.get("/api/fortune", getFortune)
+app.get("/api/goals", getGoals)
+app.post("/api/goals", createGoal)
+app.delete("/api/goals/:id", deleteGoal)
 
 //--------LISTEN----------
 app.listen(4000, () => console.log("Server running on 4000"));
