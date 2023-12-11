@@ -1,12 +1,30 @@
+// const { newStatus } = require("../server/controller")
+
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortuneButton")
 const form = document.querySelector("#goal-form")
 const goal = document.querySelector("#goal-input")
 const container = document.querySelector("#goal-container")
+const updateBtn = document.querySelector("#updateButton")
+// const newStatus = document.getElementById('#statusInput')
 
 const getAllGoals = () => {
     axios
         .get('http://localhost:4000/api/goals')
+        .then((res) => {
+            container.innerHTML = ""
+            console.log(res.data)
+            res.data.forEach(createGoal)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+}
+
+const deleteGoal = (taskObj) => {
+    console.log(taskObj)
+    axios
+        .delete(`http://localhost:4000/api/goals/${taskObj.id}`)
         .then((res) => {
             container.innerHTML = ""
             console.log(res.data)
@@ -41,14 +59,12 @@ const handleSubmit = (event) => {
         })
 }
 
-const deleteGoal = (taskObj) => {
-    console.log(taskObj)
+const updateStatus = () => {
+    const newStatus = document.getElementById('#statusInput')
     axios
-        .delete(`http://localhost:4000/api/goals/${taskObj.id}`)
+        .put("http://localhost:4000/api/update-status", {newStatus})
         .then((res) => {
-            container.innerHTML = ""
-            console.log(res.data)
-            res.data.forEach(createGoal)
+            console.log('status updated, nice job', res.data)
         })
         .catch((err) => {
             console.error(err)
@@ -74,5 +90,6 @@ const getFortune = () => {
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 form.addEventListener('submit', handleSubmit)
+updateBtn.addEventListener('click', updateStatus)
 
 getAllGoals()

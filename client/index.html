@@ -7,17 +7,26 @@
   </head>
   <body class="container">
     <header>
-    <button id="complimentButton">Get a compliment</button>
-    <button id="fortuneButton">Get a random fortune</button>
+    <button id="complimentButton" style="cursor: pointer">CLICK to get a compliment</button>
+    <button id="fortuneButton" style="cursor: pointer">CLICK to get a random fortune</button>
     </header>
 
     <h2>Claim your success by listing your goals here:</h2>
 
     <form id="goal-form">
-      <input id="goal-input" type="text" placeholder="What's your goal?">
+      <input id="goal-input" type="text" placeholder="Type your goal here...">
       <button>Add Goal To List</button>
     </form>
    <div id="goal-container"></div>
+
+   <h3>Once you've completed your goal, click on it to remove it from your list! Congrats on the progress!</h3>
+
+   <h1>Motivation Status Update</h1>
+
+    <label for="statusInput">New Status:</label>
+    <input type="text" id="statusInput" placeholder="Enter new status">
+
+    <button id="updateButton" onclick="updateStatus()">Update Status</button>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>

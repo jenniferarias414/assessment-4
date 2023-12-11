@@ -1,5 +1,6 @@
 let goals = []
 let globalID = 1
+let currentStatus = 'Initial Status'
 
 
 module.exports = {
@@ -38,6 +39,11 @@ module.exports = {
 
     getGoals: (req, res) => {
         res.status(200).send(goals)
-    }
+    },
 
+    updateStatus: (req, res) => {
+        const {newStatus} = req.body
+        currentStatus = newStatus
+        res.status(200).send(currentStatus)
+    }
 }
